@@ -30,22 +30,22 @@
 </form>
 <p id="message"></p>
 <script type="text/javascript">
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
   //set global speech and message variables
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
-  var msg = document.getElementById("message");
-  var q = document.getElementById("q");
+  const msg = document.getElementById("message");
+  const q = document.getElementById("q");
   //check for speech recognition API support
   if (window.SpeechRecognition === null) {
     //disable talk+record input
     document.getElementById("talk").setAttribute('disabled', 'disabled');
     msg.innerHTML = '<strong class="loading">Bummer… your browser does not support speech input. Type in your search and hit enter.</strong>';
   } else {
-    var recognition = new window.SpeechRecognition();
+    const recognition = new window.SpeechRecognition();
     //recognition.continuous = true; // keep processing input until stopped
     //recognition.interimResults = true; // show interim results
     recognition.lang = 'en-US'; // specify the language
-    recognition.onresult = function(event) {
+    recognition.onresult = event => {
       if (event.results.length > 0) {
         msg.innerHTML = '<strong class="loading">Hold on... running your search.</strong>';
         q.value = event.results[0][0].transcript;
@@ -53,14 +53,14 @@ window.addEventListener('load', function() {
       }
     };
     //set up event to start recognition when input is clicked/touched
-    document.getElementById("talk").addEventListener('click', function() {
+    document.getElementById("talk").addEventListener('click', () => {
       recognition.start();
       msg.innerHTML = '<strong class="loading">Talk to me…</strong>';
     });
     //set error message if recognition fails
-    recognition.onerror = function(event) {
+    recognition.onerror = event => {
       msg.innerHTML = '<strong class="loading">Could not hear you. Can you try again?</strong>';
-      console.log('Recognition error: ' + event.message);
+      console.log(`Recognition error: ${event.message}`);
     };
   }
 }, false);

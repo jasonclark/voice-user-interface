@@ -128,8 +128,8 @@ const Assistant = ((() => {
     const assistantUIUnavailable = document.getElementById('assistant-ui-unavailable-msg');
     const speechSynth = window.speechSynthesis || false;
     let voices = [];
-    const introMsg = `Hello! I'm your voice assistant. I can do things for you. Like, help you navigate the site; or give you updates on the Library's new projects. So, how may I help?`;
-    const wakeupMsg = `Hi! How may I help?`;
+    const introMsg = `Hello! I'm your voice assistant. I can do things for you. Like, help you navigate the site; or give you updates on the Library's new happenings. So, how may I help?`;
+    const wakeupMsg = `Still here. Ask me another question.`;
     const utterance = (!!window.SpeechSynthesisUtterance) ? new window.SpeechSynthesisUtterance() : false;
 
     const interactions = {
@@ -153,6 +153,8 @@ const Assistant = ((() => {
         {"command" : "librarian", "href" : "https://www.lib.montana.edu/people/liaisons.php"},
         {"command" : "hours", "href" : "http://calendar.lib.montana.edu/"},
         {"command" : "people", "href" : "https://www.lib.montana.edu/people/" },
+        {"command" : "meaning of life", "response" : "The answer to the ultimate question of life, the universe and everything is 42."},
+        {"command" : "favorite things", "response" : "I love unicorns, rainbows, and jelly beans."},
         {"command" : "who created you", "response" : "Jason A. Clark. @jaclark. He created me."},
         {"command" : "do you like your job", "response" : "Mostly. I like navigating the information superhighway!"},
     ];

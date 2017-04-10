@@ -39,6 +39,8 @@ background: #fafafa;
 border: 1px solid #ebebeb;
 border-radius:5px;
 box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+min-height:396px;/*height:90vh;*/;
+padding:0 5px;
 }
 .centered {
   text-align: center;
@@ -91,19 +93,22 @@ box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 
 <main>
   <h1 class="centered">Library Voice Assistant</h1>
   <div id="assistant-ui" class="assistant-ui-container">
-    <div class="centered">
+    <p class="centered">
       <a class="button" id="wake-up-assistant" href="javascript:;">Activate</a>
-    </div>
+    </p>
     <div class="copy-container">
-      <p>Here is a list of supported commands for the purpose of this demo:</p>
-      <ul>
-        <li>Go to home</li>
-        <li>Find my librarian</li>
-        <li>Search library people</li>
-        <li>What are the library hours?</li>
-        <li>Do you like your job?</li>
-        <li>Who created you?</li>
-      </ul>
+      <details>
+        <summary>List of supported commands for this demo:</summary>
+	<ul>
+	  <li>Go to home</li>
+          <li>Find my librarian</li>
+          <li>Search library people</li>
+          <li>What are the library hours?</li>
+	  <li>Do you like your job?</li>
+          <li>Who created you?</li>
+	  <li>What is the meaning of life?</li>
+        </ul>
+      </details>
     </div>
     <div id="conversation-box" class="conversation-box-el copy-container"></div>
   </div>

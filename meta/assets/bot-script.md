@@ -1,14 +1,11 @@
-*(searchLibrary)*
+***(searchLibrary)***`
 
-U: HeyLibrary, search the library.
+> U: HeyLibrary, search the library.
+> A: Ok, I can do that. Tell me your search query.
+> U: *user speaks query*
+> A: Got it. Running that search for you.
 
-A: Ok, I can do that. Tell me your search query.
-
-U: *user speaks query*
-
-A: Got it. Running that search for you.
-
-*(browseLibrary)*
+***(browseLibrary)***
 
 U: 
 
@@ -18,7 +15,7 @@ U:
 
 A: 
 
-*(aboutLibrary)*
+***(aboutLibrary)***
 
 U: 
 
@@ -28,7 +25,7 @@ U:
 
 A: 
 
-*(feedbackLibrary)*
+***(feedbackLibrary)***
 
 U: 
 
@@ -38,7 +35,7 @@ U:
 
 A: 
 
-*(visitMainLibrary)*
+***(visitMainLibrary)***
 
 U: 
 
@@ -48,7 +45,7 @@ U:
 
 A: 
 
-*(contactLibrary)*
+***(contactLibrary)***
 
 U: 
 
@@ -58,7 +55,7 @@ U:
 
 A: 
 
-*(shareLibrary)*
+***(shareLibrary)***
 
 U: 
 
@@ -68,7 +65,7 @@ U:
 
 A: 
 
-*(bookmarkLibrary)*
+***(bookmarkLibrary)***
 
 U: 
 

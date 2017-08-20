@@ -1,77 +1,80 @@
-***(searchLibrary)***`
+***(searchLibrary)***
 
 > U: HeyLibrary, search the library.
+
 > A: Ok, I can do that. Tell me your search query.
+
 > U: *user speaks query*
+
 > A: Got it. Running that search for you.
 
 ***(browseLibrary)***
 
-U: 
+> U: 
 
-A: 
+> A: 
 
-U: 
+> U: 
 
-A: 
+> A: 
 
 ***(aboutLibrary)***
 
-U: 
+> U: 
 
-A: 
+> A: 
 
-U: 
+> U: 
 
-A: 
+> A: 
 
 ***(feedbackLibrary)***
 
-U: 
+> U: 
 
-A: 
+> A: 
 
-U: 
+> U: 
 
-A: 
+> A: 
 
 ***(visitMainLibrary)***
 
-U: 
+> U: 
 
-A: 
+> A: 
 
-U: 
+> U: 
 
-A: 
+> A: 
 
 ***(contactLibrary)***
 
-U: 
+> U: 
 
-A: 
+> A: 
 
-U: 
+> U: 
 
-A: 
+> A: 
 
 ***(shareLibrary)***
 
-U: 
+> U: 
 
-A: 
+> A: 
 
-U: 
+> U: 
 
-A: 
+> A: 
 
 ***(bookmarkLibrary)***
 
-U: 
+> U: 
 
-A: 
+> A: 
 
-U: 
+> U: 
 
-A: 
+> A: 
 

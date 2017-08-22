@@ -10,13 +10,13 @@
 
 ***(browseLibrary)***
 
-> U: 
+> U: HeyLibrary, can you let me browse the library. 
 
-> A: 
+> A: Yes, but I need to know what topic you want to browse.
 
-> U: 
+> U: *user speaks topic*
 
-> A: 
+> A: Hmmm... Let's see what we can find.
 
 ***(aboutLibrary)***
 

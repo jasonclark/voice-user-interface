@@ -20,9 +20,9 @@
 
 ***(aboutLibrary)***
 
-> U: 
+> U: HeyLibrary, show me about the library 
 
-> A: 
+> A: You bet. Here's the about page
 
 > U: 
 
@@ -30,9 +30,9 @@
 
 ***(feedbackLibrary)***
 
-> U: 
+> U: HeyLibrary, I have feedback for you.
 
-> A: 
+> A: Interesting... I'd like to hear it. Here's our feedback form.
 
 > U: 
 
@@ -40,29 +40,29 @@
 
 ***(visitMainLibrary)***
 
-> U: 
+> U: HeyLibrary, where's the main library site?
 
-> A: 
+> A: Do you mean our library homepage?
 
-> U: 
+> U: Yes.
 
-> A: 
+> A: OK, here's our homepage
 
 ***(contactLibrary)***
 
-> U: 
+> U: HeyLibrary, How do I contact the libraries?
 
-> A: 
+> A: Oh, we have a feedback form. Here is the link.
 
-> U: 
+> U: Thanks!
 
 > A: 
 
 ***(shareLibrary)***
 
-> U: 
+> U: HeyLibary, I want to share this page. How can I do that?
 
-> A: 
+> A: Yes, you can. Do you see the sharing buttons on the page? Click one.
 
 > U: 
 
@@ -70,11 +70,11 @@
 
 ***(bookmarkLibrary)***
 
-> U: 
+> U: HeyLibrary, How do I bookmark a page?
 
-> A: 
+> A: Sometimes, I forget things, so I totally understand the need to bookmark.
 
-> U: 
+> U: Okqy, what do I do?
 
-> A: 
+> A: Go to your browser and save this page as a bookmark.
 

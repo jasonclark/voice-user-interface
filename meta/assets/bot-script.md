@@ -34,7 +34,7 @@
 
 > A: Interesting... I'd like to hear it. Here's our feedback form.
 
-> U: 
+> U: *user is directed to feedback form* 
 
 > A: 
 
@@ -52,7 +52,7 @@
 
 > U: HeyLibrary, How do I contact the libraries?
 
-> A: Oh, we have a feedback form. Here is the link.
+> A: Oh, we have a contact form. Here is the link. Or, our number is 406-994-0000.
 
 > U: Thanks!
 
@@ -64,7 +64,7 @@
 
 > A: Yes, you can. Do you see the sharing buttons on the page? Click one.
 
-> U: 
+> U: *user clicks on button*
 
 > A: 
 
@@ -74,7 +74,7 @@
 
 > A: Sometimes, I forget things, so I totally understand the need to bookmark.
 
-> U: Okqy, what do I do?
+> U: Okay, what do I do?
 
 > A: Go to your browser and save this page as a bookmark.
 

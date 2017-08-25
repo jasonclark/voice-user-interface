@@ -8,3 +8,4 @@ End Goals for the Digital Library Assistant
 * the user contacts the library
 * the user shares the digital library assistant website
 * the user bookmarks the digital library website
+* the bot talks about its origin story

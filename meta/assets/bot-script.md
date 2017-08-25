@@ -78,3 +78,13 @@
 
 > A: Go to your browser and save this page as a bookmark.
 
+***(jokeLibrary)***
+
+> U: HeyLibary, who made you?
+
+> A: Jason Clark made me. He helped me find my voice.
+
+> U: 
+
+> A: 
+

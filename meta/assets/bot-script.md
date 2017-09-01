@@ -78,6 +78,20 @@
 
 > A: Go to your browser and save this page as a bookmark.
 
+***(makeLibraryList)***
+
+> U: HeyLibrary, Can you make me a book list for my class?
+
+> A: Probably... What is your class title and number?
+
+> U: *user speaks class title and number*
+
+> A: *repeats class title and number* Is that right?
+
+> U: *user confirms*
+
+> A: Got it. Let me get that book list.
+
 ***(jokeLibrary)***
 
 > U: HeyLibary, who made you?

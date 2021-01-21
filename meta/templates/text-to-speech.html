@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="ie=edge" http-equiv="X-UA-Compatible">
+<title>Talking Book demo</title>
+<style>
+* {
+  box-sizing: border-box;
+}
+:root {
+  --base-color: #444;
+  --dark-color: #213c69;
+  --light-color: #f4f5f7;
+  --success-color: #f0f8f1;
+  --warning-color: #fbeeec;
+  --spacing: 16px;
+}
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  margin: 0;
+  padding: 0;
+  color: var(--dark-color);
+  font-size: 18px;
+  line-height: 1.5rem;
+}
+header, main {
+  width: 80vw;
+  max-width: 90%;
+  margin: 10px auto;
+}
+label {
+  display: block;
+}
+textarea {
+  width: 100%;
+  height: 60vh;
+  padding: 10px;
+  margin: 4px 0 20px 0;
+}
+</style>
+</head>
+<body>
+<header>
+<h1>Talking Book - Text to Speech</h1>
+</header>
+<main>
+<noscript id="nosupport">
+<p>Your browser doesn't support Text to Speech</p>
+</noscript>
+<label for="text">Paste a Narrative & Listen</label> 
+<textarea data-tts-text="" id="text" name="text">It was a dark and stormy night...</textarea>
+<div data-tts="">
+<select data-tts-select="" hidden="" id="voices" name="voices"></select> 
+<button data-tts-play="" hidden="">Play</button>
+<button data-tts-pause="" hidden="">Pause</button>
+<button data-tts-resume="" hidden="">Resume</button>
+</div>
+</main>
+<script>
+if ('speechSynthesis' in window) {
+  const synthesis = window.speechSynthesis;
+  const voiceSelect = document.querySelector('[data-tts-select]');
+  const playButton = document.querySelector('[data-tts-play]');
+  const pauseButton = document.querySelector('[data-tts-pause]');
+  const resumeButton = document.querySelector('[data-tts-resume]');
+  const textarea = document.querySelector('[data-tts-text]');
+  let text = false;
+  let chosenVoice = false;
+  let isPlaying = false;
+  let voices;
+
+  const sampleText = [
+    "I am an invisible man. No, I am not a spook like those who haunted Edgar Allan Poe; nor am I one of your Hollywood-movie ectoplasms.",
+    "It was a pleasure to burn. It was a special pleasure to see things eaten, to see things blackened and changed.",
+    "The master's tools will never dismantle the master's house. They may allow us to temporarily beat him at his own game, but they will never enable us to bring about genuine change.",
+    "Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.",
+    "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
+    "Many years later, as he faced the firing squad, Colonel Aureliano Buendía was to remember that distant afternoon when his father took him to discover ice.",
+    "It was a dark and stormy night; the rain fell in torrents, except at occasional intervals, when it was checked by a violent gust of wind which swept up the streets...",
+    "The sky above the port was the color of television, tuned to a dead channel.",
+    "Mrs. Dalloway said she would buy the flowers herself. For Lucy had her work cut out for her. The doors would be taken off their hinges; Rumpelmayer's men were coming. And then, thought Clarissa Dalloway, what a morning--fresh as if issued to children on a beach.",
+    "Ships at a distance have every man’s wish on board. For some they come in with the tide. For others they sail forever on the horizon, never out of sight, never landing until the Watcher turns his eyes away in resignation, his dreams mocked to death by Time.",
+    "He was an old man who fished alone in a skiff in the Gulf Stream and he had gone eighty-four days now without taking a fish.",
+    "We started dying before the snow, and like the snow, we continued to fall. It was surprising there were so many of us left to die.",
+    "It was a queer, sultry summer, the summer they electrocuted the Rosenbergs, and I didn't know what I was doing in New York.",
+    "It was just noon that Sunday morning when the sheriff reached the jail with Lucas Beauchamp though the whole town (the whole county too for that matter) had known since the night before that Lucas had killed a white man.",
+    "It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions,...",
+    "I was born twice: first, as a baby girl, on a remarkably smogless Detroit day in January of 1960; and then again, as a teenage boy, in an emergency room near Petoskey, Michigan, in August of 1974.",
+    "You don’t know about me, without you have read a book by the name of The Adventures of Tom Sawyer, but that ain’t no matter. That book was made by a Mr Mark Twain, and he told the truth, mainly.",
+    "Many years later, as he faced the firing squad, Colonel Aureliano Buendía was to remember that distant afternoon when his father took him to discover ice.",
+    "Everyone had always said that John would be a preacher when he grew up, just like his father. It had been said so often that John, without ever thinking about it, had come to believe it himself.",
+    "Call me Ishmael. Some years ago - never mind how long precisely - having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.",
+    "Our hero was not one of those Dominican cats everybody's always going on about—he wasn't no home-runner hitter or fly bachetero, not a playboy with a million hots on his jock.",
+    "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness,..."
+  ];
+  //sample array and populate textarea
+  const randomText = sampleText[Math.floor(Math.random()*sampleText.length)];
+  document.querySelector('#text').innerText = randomText;
+
+  const getText = () => {
+    return textarea.value.replace(/\n\n/g, ', ');
+  };
+
+  const play = () => {
+    if (!text) {
+      text = getText()
+    }
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    if (chosenVoice) {
+      utterance.voice = chosenVoice;
+    }
+
+    // Speak the utterance
+    synthesis.speak(utterance);
+    isPlaying = true;
+    pauseButton.hidden = false;
+    playButton.hidden = true;
+    resumeButton.hidden = true;
+
+    // somehow chrome stops after 14seconds, so resume from there
+    var r = setInterval(() => {
+      if (!isPlaying) {
+        clearInterval(r);
+      } else {
+        synthesis.resume();
+      }
+    }, 14000);
+
+    window.addEventListener('beforeunload', () => {
+      clearInterval(r);
+      synthesis.cancel();
+    });
+
+
+    utterance.onend = () => {
+      isPlaying = false;
+      playButton.hidden = false;
+      pauseButton.hidden = true;
+      resumeButton.hidden = true;
+      text = false;
+    }
+  };
+
+  const pause = () => {
+    synthesis.pause();
+    isPlaying = false;
+    pauseButton.hidden = true;
+    resumeButton.hidden = false;
+    playButton.hidden = true;
+  };
+
+  const resume = () => {
+    synthesis.resume();
+    isPlaying = true;
+    pauseButton.hidden = false;
+    resumeButton.hidden = true;
+    playButton.hidden = true;
+  }
+
+  const setVoices = () => {
+    voices = synthesis.getVoices();
+    // Log the properties of the voices in the list
+    if (voices && voices.length && voices.length > 0) {
+      voices.forEach(function (voice) {
+        const voiceOption = document.createElement('option');
+        voiceOption.setAttribute('data-lang', voice.lang);
+        voiceOption.setAttribute('data-name', voice.name);
+        voiceOption.setAttribute('value', voice.name);
+        voiceOption.innerText = voice.name + ' (' + voice.lang + ')';
+        //voiceOption.innerText = voice.name;
+        voiceSelect.appendChild(voiceOption);
+      });
+      voiceSelect.hidden = false;
+      voiceSelect.addEventListener('change', (ev) => {
+        chosenVoice = voices.filter((voice) => {
+          return voice.name === ev.target.value;
+        })[0];
+      });
+
+      playButton.hidden = false;
+      playButton.addEventListener('click', () => {
+        play();
+      });
+
+      pauseButton.addEventListener('click', () => {
+        pause();
+      });
+
+      resumeButton.addEventListener('click', () => {
+        resume();
+      });
+
+      textarea.addEventListener('keyup', (ev) => {
+        text = ev.target.value.replace(/\n\n/g, ', ');
+        isPlaying = false;
+        synthesis.cancel();
+        playButton.hidden = false;
+        pauseButton.hidden = true;
+        resumeButton.hidden = true;
+      });
+
+    }
+  };
+
+  setTimeout(function () {
+    setVoices();
+  }, 50)
+
+} else {
+  document.documentElement.innerHTML = document.getElementById('nosupport').innerHTML;
+}
+</script>
+</body>
+</html>

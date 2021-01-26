@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="ie=edge" http-equiv="X-UA-Compatible">
+<title>Speak a Topic - View a Gif</title>
+<meta name="description" content="Demonstration of SpeechRecognition API that responds to voice commands and displays random animated gifs.">
+<!-- minimum viable  social tags -->
+<meta property="og:title" content="Speak a Topic - View a Gif"/>
+<meta property="og:description" content="Prototypes that demonstrate voice user interfaces for libraries."/>
+<meta property="og:image" content="http://www.lib.montana.edu/~jason/meta/img/clark-share-default.png"/>
+<meta property="og:url" content="http://www.lib.montana.edu/~jason/files/voice-user-interface/"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:creator" property="og:site_name" content="@jaclark"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="http://www.jasonclark.info"/>
+<style>
+* {
+  box-sizing: border-box;
+}
+:root {
+  --base-color: #444;
+  --dark-color: #213c69;
+  --light-color: #f4f5f7;
+  --success-color: #f0f8f1;
+  --warning-color: #fbeeec;
+  --spacing: 16px;
+}
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  margin: 0;
+  padding: 0;
+  color: var(--dark-color);
+  font-size: 18px;
+  line-height: 1.5rem;
+}
+header, main {
+  width: 80vw;
+  max-width: 90%;
+  margin: 10px auto;
+}
+label {
+  display: block;
+}
+textarea {
+  width: 100%;
+  height: 60vh;
+  padding: 10px;
+  margin: 4px 0 20px 0;
+}
+</style>
+</head>
+<body>
+<header>
+<h1>Speak a Topic - View a Gif</h1>
+</header>
+<main>
+<noscript id="nosupport">
+<p>Your browser doesn't support Speech Recognition</p>
+</noscript>
+<!--<form action="speech-recognition-to-gif.html" method="get">
+<label id="question-div" for="my-button">Speak your Gif</label>-->
+<button id="my-button"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1.2-9.1c0-.66.54-1.2 1.2-1.2.66 0 1.2.54 1.2 1.2l-.01 6.2c0 .66-.53 1.2-1.19 1.2-.66 0-1.2-.54-1.2-1.2V4.9zm6.5 6.1c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg> Hear Me</button>
+<!--</form>-->
+<div id="speech-div"></div>
+<div id="image-div"><img id="the-gif" src=""></div>
+</main>
+
+<!--NOTE: demo is live at https://www.lib.montana.edu/~jason/files/voice-user-interface/speech-recognition-to-gif.html-->
+
+<script>
+// to run a simple server, cd in your terminal to the folder these files are in and run:
+// python -m SimpleHTTPServer 8007
+// then go to http://localhost:8007 in your browser
+
+const SpeechRecognition = (window.SpeechRecognition || window.webkitSpeechRecognition);
+
+//const SpeechRecognition = webkitSpeechRecognition;
+const giphyAPIKey = 'rOIN5oLX90DFm4klItx8FtebPQZ8g2HQ';
+
+const getSpeech = () => {
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.start();
+  // recognition.continuous = false;
+  recognition.interimResults = true;
+  console.log('started rec');
+
+  recognition.onresult = event => {
+    const speechResult = event.results[0][0].transcript;
+    console.log('result: ' + speechResult);
+    console.log('confidence: ' + event.results[0][0].confidence);
+    document.querySelector('#speech-div').textContent = speechResult;
+    getGif(speechResult);
+  };
+
+  recognition.onend = () => {
+    console.log('it is over');
+    
+    // for "endless" mode, comment out the next line and uncomment getSpeech()
+    recognition.stop(); 
+    // getSpeech(); 
+    
+  };
+
+  recognition.onerror = event => {
+    console.log('something went wrong: ' + event.error);
+  };
+};
+
+const getGif = phrase => {
+  let url = `https://api.giphy.com/v1/gifs/random?api_key=${giphyAPIKey}&tag=${phrase}`;
+console.log(url);
+
+  fetch(url, {
+    mode: 'cors'
+  })
+    .then(response => response.json())
+    .then(result => {
+      let imgUrl = result.data.image_url;
+      document.querySelector('#the-gif').src = imgUrl;
+    });
+};
+
+document.querySelector('#my-button').onclick = () => {
+  console.log('clickity');
+  getSpeech();
+};
+</script>
+</body>
+</html>

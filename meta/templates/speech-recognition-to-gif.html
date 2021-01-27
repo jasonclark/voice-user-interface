@@ -118,7 +118,7 @@ const getSpeech = () => {
 
 const getGif = phrase => {
   let url = `https://api.giphy.com/v1/gifs/random?api_key=${giphyAPIKey}&tag=${phrase}`;
-console.log(url);
+  console.log(url);
 
   fetch(url, {
     mode: 'cors'
@@ -129,6 +129,14 @@ console.log(url);
       document.querySelector('#the-gif').src = imgUrl;
     });
 };
+
+/*
+var form = document.querySelector("form");
+  form.addEventListener("submit", function(event) {
+    console.log("Saving value", form.elements.value.value);
+    event.preventDefault();
+  });
+*/
 
 document.querySelector('#my-button').onclick = () => {
   console.log('clickity');

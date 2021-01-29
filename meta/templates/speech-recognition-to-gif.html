@@ -68,7 +68,7 @@ textarea {
 </noscript>
 <form action="speech-recognition-to-gif.html" method="get">
 <label id="question-div" for="my-button">Speak your Gif</label>
-<button id="my-button" type="submit"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1.2-9.1c0-.66.54-1.2 1.2-1.2.66 0 1.2.54 1.2 1.2l-.01 6.2c0 .66-.53 1.2-1.19 1.2-.66 0-1.2-.54-1.2-1.2V4.9zm6.5 6.1c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg> Hear Me</button>
+<button id="start-listening" type="submit"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1.2-9.1c0-.66.54-1.2 1.2-1.2.66 0 1.2.54 1.2 1.2l-.01 6.2c0 .66-.53 1.2-1.19 1.2-.66 0-1.2-.54-1.2-1.2V4.9zm6.5 6.1c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg> Hear Me</button>
 </form>
 <div id="speech-div"></div>
 <div id="image-div"><img id="the-gif" src=""></div>
@@ -92,7 +92,7 @@ const getSpeech = () => {
   recognition.start();
   // recognition.continuous = false;
   recognition.interimResults = true;
-  console.log('started rec');
+  console.log('started recognition');
 
   recognition.onresult = event => {
     const speechResult = event.results[0][0].transcript;
@@ -130,29 +130,18 @@ const getGif = phrase => {
     });
 };
 
-/*
-var form = document.querySelector("form");
-  form.addEventListener("submit", function(event) {
-    console.log("Saving value", form.elements.value.value);
-    event.preventDefault();
-  });
-
 const form = document.querySelector("form");
 form.addEventListener("submit", event => {
- console.log("Saving value",  form.elements.value.value);
-event.preventDefault();
-});
-*/
-const form = document.querySelector("form");
-form.addEventListener("submit", event => {
- console.log('clickity');
- getSpeech();
- event.preventDefault();
+  console.log('started listening');
+  getSpeech();
+  event.preventDefault();
 });
 
-/*
-document.querySelector('#my-button').onclick = () => {
-  console.log('clickity');
+/* code for button without form; need to remove <form> markup and remove type=submit from <button>
+could be useful in interface where you just want a simple button to trigger speech recongnition
+
+document.querySelector('#start-listening').onclick = () => {
+  console.log('started listening');
   getSpeech();
 };
 */
